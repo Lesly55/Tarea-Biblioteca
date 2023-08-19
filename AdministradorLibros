@@ -1,0 +1,28 @@
+import java.util.ArrayList;
+
+class AdministradorLibros {
+    private ArrayList<Libro> biblioteca = new ArrayList<>();
+
+    // Métodos agregarLibro, eliminarLibroPorISBN, mostrarLibros...
+    
+    private void agregarLibro(Libro libro) {
+    	biblioteca.add(libro);
+    }
+    
+    private void eliminarLibroPorISBN(String ISBN) {
+    	for(Libro libro : biblioteca) {
+    		if(libro.getISBN().equals(ISBN)) {
+    			biblioteca.remove(libro);
+    		}
+    	}
+    	
+    	
+    }
+    
+    private void mostrarLibros() {
+    	for(Libro libro : biblioteca) {
+    		libro.printLibro();
+    		System.out.print("\n");
+    		}
+    }
+}
