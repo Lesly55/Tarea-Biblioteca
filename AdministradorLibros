@@ -4,12 +4,11 @@ class AdministradorLibros {
     private ArrayList<Libro> biblioteca = new ArrayList<>();
 
     // Métodos agregarLibro, eliminarLibroPorISBN, mostrarLibros...
-    
-    private void agregarLibro(Libro libro) {
+    public void agregarLibro(Libro libro) {
     	biblioteca.add(libro);
     }
-    
-    private void eliminarLibroPorISBN(String ISBN) {
+
+    public void eliminarLibroPorISBN(String ISBN) {
     	for(Libro libro : biblioteca) {
     		if(libro.getISBN().equals(ISBN)) {
     			biblioteca.remove(libro);
@@ -18,11 +17,14 @@ class AdministradorLibros {
     	
     	
     }
-    
-    private void mostrarLibros() {
+
+    public String mostrarLibros() {
+    	String libros = null;
     	for(Libro libro : biblioteca) {
-    		libro.printLibro();
-    		System.out.print("\n");
+    		libros = libro.getLibro() + "\n";
     		}
+    	return libros;
     }
 }
+
+
