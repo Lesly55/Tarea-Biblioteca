@@ -1,40 +1,90 @@
-class Libro {
-    private String titulo;
-    private String autor;
-    private String ISBN;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-    public Libro(String titulo, String autor, String ISBN) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.ISBN = ISBN;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+public class GUIAdministradorLibros extends JFrame implements ActionListener {
+    private JFrame frame;
+    AdministradorLibros admin;
+    JMenuBar menuBar;
+    JMenu menu;
+    JMenuItem agregarItem, eliminarItem, mostrarItem;
+    TextField tf;
+    
+    
+    public GUIAdministradorLibros() {
+        frame = new JFrame("Administrador de Libros");
+        admin = new AdministradorLibros();
+        
+        menuBar = new JMenuBar();
+        
+        menu = new JMenu("Opciones");
+        agregarItem = new JMenuItem("Agregar libro");
+        eliminarItem = new JMenuItem("Eliminar libro por ISBN");
+        mostrarItem = new JMenuItem("Mostrar todos los libros");
+        
+        agregarItem.addActionListener(this);
+        eliminarItem.addActionListener(this);
+        mostrarItem.addActionListener(this);
+
+        
+        menu.add(agregarItem);
+        menu.add(eliminarItem);
+        menu.add(mostrarItem);
+        menuBar.add(menu);
+        frame.setJMenuBar(menuBar);
+        
+        agregarItem.addActionListener((ActionListener) new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para agregar libro...
+            }
+        });
+        
+        eliminarItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para eliminar libro por ISBN...
+            }
+        });
+        
+        mostrarItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para mostrar todos los libros...
+            }
+        });
+        
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 
-    // Getters, Setters y el método toString()...
-    protected String getTitulo() {
-    	return titulo;
-    }
-    
-    protected void setTitulo(String titulo) {
-    	this.titulo = titulo;
-    }
-    
-    protected String getAutor() {
-    	return autor;
-    }
-    
-    protected void setAutor(String autor) {
-    	this.autor = autor;
-    }
-    
-    protected String getISBN() {
-    	return ISBN;
-    }
-    
-    protected void setISBN(String ISBN) {
-    	this.ISBN = ISBN;
-    }
-    
-    protected String printLibro() {
-    	return titulo + "por " + autor + " - ISBN: " + ISBN;
-    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource()== agregarItem) {
+			String titulo = JOptionPane.showInputDialog(frame,
+                    "Titulo: ", null);
+			String autor = JOptionPane.showInputDialog(frame,
+                    "Autor: ", null);
+			String ISBN = JOptionPane.showInputDialog(frame,
+                    "ISBN: ", null);
+			Libro nuevoLibro = new Libro(titulo, autor, ISBN);
+			admin.agregarLibro(nuevoLibro);
+			
+		}
+		if (e.getSource()== mostrarItem) { 
+			
+		}
+		if (e.getSource()== eliminarItem) {
+			String ISBN = JOptionPane.showInputDialog(frame,
+                    "ISBN: ", null);
+			admin.eliminarLibroPorISBN(ISBN);
+		}
+		
+	}
+  
 }
